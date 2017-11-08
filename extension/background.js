@@ -231,9 +231,6 @@ function onScriptsLoaded() {
           description = description.replace(queryREs[j], '%|$1|%');
         }
 
-        // Remove HTML tags from description since omnibox cannot display them.
-        description = description.replace(/\</g, '&lt;').replace(/\>/g, '&gt;');
-
         // Remove special markers
         description = description
             .replace(/\%\{/g, '')
