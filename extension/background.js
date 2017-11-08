@@ -234,12 +234,12 @@ function onScriptsLoaded() {
         // Remove HTML tags from description since omnibox cannot display them.
         description = description.replace(/\</g, '&lt;').replace(/\>/g, '&gt;');
 
-        // Convert special markers to Omnibox XML
+        // Remove special markers
         description = description
-            .replace(/\%\{/g, '<dim>')
-            .replace(/\}\%/g, '</dim>')
-            .replace(/\%\|/g, '<match>')
-            .replace(/\|\%/g, '</match>');
+            .replace(/\%\{/g, '')
+            .replace(/\}\%/g, '')
+            .replace(/\%\|/g, '')
+            .replace(/\|\%/g, '');
 
         omniboxResults.push({
           content: 'https://developer.android.com/' + result.link,
