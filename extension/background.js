@@ -263,8 +263,12 @@ function onScriptsLoaded() {
 
 
 function navigateToUrl(url) {
-  chrome.tabs.getSelected(null, function(tab) {
-    chrome.tabs.update(tab.id, {url: url});
+  browser.tabs.query({active: true}).then(function(tabs) {
+    if (tabs.length <= 0) {
+      return;
+    }
+
+    browser.tabs.update(tabs[0].id, {url: url});
   });
 }
 
