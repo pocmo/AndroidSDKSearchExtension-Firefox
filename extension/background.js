@@ -215,28 +215,11 @@ function onScriptsLoaded() {
 
         var description = result.label;
         var firstCap = description.search(capitalLetterRE);
-        if (firstCap >= 0 && result.type != 'ref.xml') {
-          var newDesc;
-          newDesc = '%{' + description.substring(0, firstCap) + '}%';
-          newDesc += description.substring(firstCap);
-          description = newDesc;
-        }
 
         var subDescription = result.subLabel || '';
         if (subDescription) {
-          description += ' %{(' + subDescription + ')}%';
+          description += ' (' + subDescription + ')';
         }
-
-        for (var j = 0; j < queryREs.length; j++) {
-          description = description.replace(queryREs[j], '%|$1|%');
-        }
-
-        // Remove special markers
-        description = description
-            .replace(/\%\{/g, '')
-            .replace(/\}\%/g, '')
-            .replace(/\%\|/g, '')
-            .replace(/\|\%/g, '');
 
         omniboxResults.push({
           content: 'https://developer.android.com/' + result.link,
