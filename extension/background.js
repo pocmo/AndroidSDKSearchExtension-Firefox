@@ -161,7 +161,7 @@ function loadScript(url, successFn, errorFn) {
  */
 function onScriptsLoaded() {
   chrome.omnibox.setDefaultSuggestion({
-    description: 'Search Android SDK docs for <match>%s</match>'
+    description: 'Search Android SDK docs'
   });
 
   chrome.omnibox.onInputChanged.addListener(
