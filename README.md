@@ -1,8 +1,10 @@
 Android SDK Search Extension
 ============================
 
-A Chrome extension that adds an 'ad' omnibox command and view source links for the Android SDK.
+A Firefox extension that adds an 'ad' Awesome Bar command and view source links for the Android SDK.
 
-The extension can be downloaded [on the Chrome Web Store](https://chrome.google.com/webstore/detail/android-sdk-search/hgcbffeicehlpmgmnhnkjbjoldkfhoin?hl=en).
+The extension can be downloaded [on addons.mozilla.org](https://addons.mozilla.org/en-US/firefox/addon/android-sdk-search-fx).
 
 ![Android SDK Search Extension](art/screenshot.png "Android SDK Search Extension")
+
+Firefox port of [Roman Nurik's Chrome Extension](https://github.com/romannurik/AndroidSDKSearchExtension).
