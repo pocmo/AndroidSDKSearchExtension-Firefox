@@ -243,13 +243,7 @@ function onScriptsLoaded() {
 
 
 function navigateToUrl(url) {
-  browser.tabs.query({active: true}).then(function(tabs) {
-    if (tabs.length <= 0) {
-      return;
-    }
-
-    browser.tabs.update(tabs[0].id, {url: url});
-  });
+  browser.tabs.update({url: url});
 }
 
 
