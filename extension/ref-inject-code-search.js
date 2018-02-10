@@ -342,7 +342,10 @@ chrome.storage.local.get({
   baseUrl: _GOOGLESOURCE_SITE
 }, function(items) {
   var url = window.location.href;
-  var appendContent;
+  var fragment = document.createDocumentFragment();
+  var appendContent = document.createElement('div');
+  appendContent.className = '__asdk_search_extension_link_container__';
+  fragment.appendChild(appendContent);
 
   var m;
   if (m = url.match(_PACKAGE_DOC_URL_REGEX)) {
@@ -405,9 +408,11 @@ chrome.storage.local.get({
         url += folder + '/src/main/java/android/support/test/' + suffix;
       }
 
-      appendContent = [
-          '<a class="__asdk_search_extension_link__" href="', url, '">view source listing</a>'
-      ].join('');
+      let linkDom = document.createElement('a');
+      linkDom.className = '__asdk_search_extension_link__';
+      linkDom.href = url;
+      linkDom.innerText = 'view source listing';
+      appendContent.appendChild(linkDom);
     }
 
   } else if (m = url.match(_RESOURCE_DOC_URL_REGEX)) {
@@ -421,7 +426,6 @@ chrome.storage.local.get({
         // Single string, convert to array
         destinations = [destinations];
       }
-      appendContent = '';
 
       var project = 'base';
       var tree = 'core/res/res';
@@ -452,15 +456,15 @@ chrome.storage.local.get({
 
       for (var i = 0; i < destinations.length; i++) {
         var resPath = destinations[i];
-        appendContent += [
-            '<a class="__asdk_search_extension_link__" href="',
-            templateUrl.replace(/\$BASEURL/g, items.baseUrl)
+
+        let linkDom = document.createElement('a');
+        linkDom.className = '__asdk_search_extension_link__';
+        linkDom.href = templateUrl.replace(/\$BASEURL/g, items.baseUrl)
                 .replace(/\$PROJECT/g, project)
-                .replace(/\$TREE/g, tree) + resPath,
-            '">view res/',
-            resPath.replace(/\/$/, ''),
-            '</a>'
-        ].join('');
+                .replace(/\$TREE/g, tree) + resPath;
+
+        linkDom.innerText = 'view res/' + resPath.replace(/\/$/, '');
+        appendContent.appendChild(linkDom);
       }
     }
 
@@ -521,19 +525,19 @@ chrome.storage.local.get({
                  + espressoInfo.folder + '/src/main/java/android/support/test/');
       }
 
-      appendContent = [
-          '<a class="__asdk_search_extension_link__" href="', url, '">view source</a>'
-      ].join('');
+      let linkDom = document.createElement('a');
+      linkDom.className = '__asdk_search_extension_link__';
+      linkDom.href = url;
+      linkDom.innerText = 'view source';
+      appendContent.appendChild(linkDom);
+
     }
 
   }
 
-  if (appendContent) {
-    var appendNode = document.createElement('div');
-    appendNode.classList.add('__asdk_search_extension_link_container__');
-    appendNode.innerHTML = appendContent;
+  if (appendContent.childElementCount > 0) {
     document.querySelector('#jd-content').insertBefore(
-        appendNode, document.querySelector('#jd-content h1').nextSibling);
+        fragment, document.querySelector('#jd-content h1').nextSibling);
   }
 
   var samplesUrl;
