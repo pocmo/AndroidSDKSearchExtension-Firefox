@@ -64,18 +64,21 @@ var _RESOURCE_MAP = {
 var _PACKAGE_MAP = {
   'java'                                 : { project:'platform/libcore',             tree:'ojluni/src/main/java' },
   'javax'                                : { project:'platform/libcore',             tree:'ojluni/src/main/java' },
-  'javax.microedition'                   : { project:null,                           tree:null },
+  'javax.microedition'                   : { project:'platform/frameworks/base',     tree:'opengl/java' },
+  'javax.xml'                            : { project:'platform/libcore',             tree:'luni/src/main/java' },
+  'junit'                                : { project:'platform/frameworks/base',     tree:'legacy-test/src' },
   'org'                                  : { project:'platform/libcore',             tree:'luni/src/main/java' },
-  'org.json'                             : { project:null,                           tree:null },
+  'org.json'                             : { project:'platform/libcore',             tree:'json/src/main/java' },
   'org.xmlpull'                          : { project:null,                           tree:null },
-  'org.apache.http'                      : { project:'platform/libcore',             tree:'core/java' },
+  'org.apache.http'                      : { project:'platform/frameworks/base',     tree:'core/java' },
   'java.math'                            : { project:'platform/libcore',             tree:'luni/src/main/java' },
+  'dalvik'                               : { project:'platform/libcore',             tree:'dalvik/src/main/java' },
   'android'                              : { project:'platform/frameworks/base',     tree:'core/java' },
   'android.drm'                          : { project:'platform/frameworks/base',     tree:'drm/java' },
   'android.drm.mobile1'                  : { project:'platform/frameworks/base',     tree:'media/java' },
   'android.renderscript'                 : { project:'platform/frameworks/base',     tree:'rs/java' },
   'android.graphics'                     : { project:'platform/frameworks/base',     tree:'graphics/java' },
-  'android.icu'                          : { project:'platform/frameworks/base',     tree:'icu4j/java' },
+  'android.icu'                          : { project:'platform/external/icu',        tree:'android_icu4j/src/main/java' },
   'android.security'                     : { project:'platform/frameworks/base',     tree:'keystore/java' },
   'android.system'                       : { project:'platform/libcore',             tree:'luni/src/main/java' },
   'android.location'                     : { project:'platform/frameworks/base',     tree:'location/java' },
@@ -86,7 +89,10 @@ var _PACKAGE_MAP = {
   'android.sax'                          : { project:'platform/frameworks/base',     tree:'sax/java' },
   'android.telecom'                      : { project:'platform/frameworks/base',     tree:'telecomm/java' },
   'android.telephony'                    : { project:'platform/frameworks/base',     tree:'telephony/java' },
-  'android.net.rtp'                      : { project:'platform/frameworks/opt/net/voip',      tree:'src/java/' },
+  'android.test'                         : { project:'platform/frameworks/base',     tree:'test-runner/src' },
+  'android.test.mock'                    : { project:'platform/frameworks/base',     tree:'test-mock/src' },
+  'android.test.suitebuilder'            : { project:'platform/frameworks/base',     tree:'legacy-test/src' },
+  'android.net.rtp'                      : { project:'platform/frameworks/opt/net/voip',      tree:'src/java' },
   'android.net.sip'                      : { project:'platform/frameworks/opt/net/voip',      tree:'src/java' },
   'android.net.wifi'                     : { project:'platform/frameworks/base',     tree:'wifi/java' },
   'android.support.animation'            : { project:'platform/frameworks/support',  tree:'dynamic-animation/src/main/java' },
@@ -99,7 +105,7 @@ var _PACKAGE_MAP = {
   'android.support.customtabs'           : { project:'platform/frameworks/support',  tree:'customtabs/src/main/java' },
   'android.support.design'               : { project:'platform/frameworks/support',  tree:'design/src' },
   'android.support.fragment'             : { project:null,                           tree:null },
-  'android.support.graphics.drawable'    : { project:'platform/frameworks/support',  tree:'graphics/drawable/animated/src/main/java' },
+  'android.support.graphics.drawable'    : { project:'platform/frameworks/support',  tree:'graphics/drawable/static/src/main/java' },
   'android.support.multidex'             : { project:'platform/frameworks/multidex', tree:'library/src' },
   'android.support.media'                : { project:'platform/frameworks/support',  tree:'exifinterface/src/main/java' },
   'android.support.media.tv'             : { project:'platform/frameworks/support',  tree:'tv-provider/src/main/java' },
@@ -140,8 +146,8 @@ var _PACKAGE_MAP = {
   //'android.arch.core.executor.testing' : { project:'',                            tree:'' },
   'android.arch.lifecycle'               : { project:'platform/frameworks/support', tree:'lifecycle/extensions/src/main/java' },
   'android.arch.paging'                  : { project:'platform/frameworks/support', tree:'paging/common/src/main/java' },
-  'android.arch.persistence.db'          : { project:'platform/frameworks/support', tree:'room/db/src/main/java' },
-  'android.arch.persistence.db.framework'    : { project:'platform/frameworks/support',      tree:'room/db-impl/src/main/java' },
+  'android.arch.persistence.db'          : { project:'platform/frameworks/support', tree:'persistence/db/src/main/java' },
+  'android.arch.persistence.db.framework': { project:'platform/frameworks/support', tree:'persistence/db-framework/src/main/java' },
   'android.arch.persistence.room'        : { project:'platform/frameworks/support', tree:'room/common/src/main/java' },
   'android.arch.persistence.room.migration'  : { project:'platform/frameworks/support',      tree:'room/runtime/src/main/java' },
   'android.arch.persistence.room.testing'    : { project:'platform/frameworks/support',      tree:'room/testing/src/main/java' },
@@ -149,6 +155,12 @@ var _PACKAGE_MAP = {
 };
 
 var _TREE_REFINEMENTS = {
+  'android.support.graphics.drawable': [
+    {
+      regex: /Animated|Animatable/,
+      tree: 'graphics/drawable/animated/src/main/java'
+    }
+  ],
   'android.support.v4.app': [
     {
       regex: /Fragment|Loader/,
