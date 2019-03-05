@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Android SDK Search",
   "description": "Adds an 'ad' omnibox command and view source links for the Android SDK.",
-  "version": "0.3.15.2",
+  "version": "0.3.16.1",
   "permissions": [
     "tabs",
     "*://developer.android.com/*",
